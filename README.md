@@ -5,3 +5,5 @@ It is an AngularJs application, which can be used to search for images (from Fli
 This is a live search app, i.e. the photo gallery will keep building as the user keep typing the search tags. The search tags need to be separated by commas, otherwise they'll be considered as one big combined tag.
 
 There are two types of paginations in this app; one will allow the user to navigate through the different pages of images, whereas the other will allow the user to navigate through the images itself. These two components also update each other smartly on navigations.
+
+In order to play with this app, download and keep all the files together in one folder, and open the "imageSearchApp.html" in some web browser (internet connectivity is required as the app will make calls to Flickr).
