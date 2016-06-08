@@ -1,6 +1,6 @@
 var MODULE_NAME = 'imageSearchApp';
 var CONTROLLER_NAME = 'FlickrImageSearchController';
-var FLICKR_API_URL = "http://api.flickr.com/services/feeds/photos_public.gne";
+var FLICKR_API_URL = "https://api.flickr.com/services/feeds/photos_public.gne";
 
 var imageSearchApp = angular.module(MODULE_NAME, []);
 
@@ -35,6 +35,16 @@ imageSearchApp.controller(CONTROLLER_NAME,
 
         $scope.isCurrentImageIndexInvalid = function () {
             return $scope.currentImageIndex < 0 || $scope.currentImageIndex >= $scope.numberOfImages - 1;
+        };
+
+        $scope.getImageSource = function () {
+            var image = $scope.images[$scope.currentImageIndex];
+            if (image == undefined) {
+                return "";
+            } else if ($scope.resolution == 'HIGH') {
+                return image.media.m.replace('m.jpg', 'b.jpg');
+            }
+            return image.media.m;
         };
 
         $scope.searchImages = function () {

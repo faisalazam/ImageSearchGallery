@@ -51,6 +51,11 @@
     margin-bottom: 11px;
 }
 
+.resolution-radios {
+    float: right;
+    padding-top: 5px;
+}
+
 .float-left {
     float: left;
 }
