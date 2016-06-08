@@ -1,0 +1,69 @@
+
+.page-title {
+    float: left;
+    font-size: 30px;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.search-criteria-container {
+    text-align: right;
+    padding-top: 15px;
+    padding-bottom: 10px;
+}
+
+.search-criteria-container input[type=text] {
+    width: 25%;
+}
+
+.thumbnails-container {
+    float: left;
+    width: 38%;
+    height: 440px;
+    margin-left: 10px;
+}
+
+.thumbnail-with-meta-data {
+    width: 50%;
+    height: 50%;
+}
+
+.thumbnails-container img {
+    width: 95%;
+    height: 70%;
+}
+
+.title, .author, .tags {
+    width: 95%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.image-preview-container {
+    width: 61%;
+    float: right;
+}
+
+.image-preview {
+    width: 100%;
+    height: 425px;
+    margin-bottom: 11px;
+}
+
+.float-left {
+    float: left;
+}
+
+body, html {
+    height: 100%;
+}
+
+div.wrap {
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    overflow: hidden;
+}

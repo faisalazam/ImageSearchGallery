@@ -1,0 +1,40 @@
+.pagination-container {
+    text-align: center;
+}
+
+.pagination {
+    display: inline-block;
+    margin-top: 0;
+}
+
+.pagination li {
+    display: inline;
+}
+
+.pagination li button {
+    color: black;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+    border: 1px solid #ddd;
+}
+
+.pagination li:first-child button {
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.pagination li:last-child button {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.pagination li button.active {
+    color: white;
+    background-color: #4CAF50;
+    border: 1px solid #4CAF50;
+}
+
+.pagination li button:hover:not(.active) {
+    background-color: #ddd;
+}
