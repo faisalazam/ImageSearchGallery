@@ -6,6 +6,8 @@ This is a live search app, i.e. the photo gallery will keep building as the user
 
 There are two types of paginations in this app; one will allow the user to navigate through the different pages of images, whereas the other will allow the user to navigate through the images itself. These two components also update each other smartly on navigations.
 
+This app also provides the flexibility to choose whether the preview needs to be displayed with high resolution, or with low resolution. This feature has been added, because sometimes, internet connectivity is not good and loading the high resolution images is slow, so low resolution option could be used in such cases to quickly go through the image gallery.
+
 Scrolling is disabled and hence, no scroll bars will be visible. So, just in case, you feel like the some controls are missing on the page, then try to maximise the browser window.
 
 In order to play with this app, download and keep all the files together in one folder, and open the "imageSearchApp.html" in some web browser (internet connectivity is required as the app will make calls to Flickr).
