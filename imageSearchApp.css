@@ -2,12 +2,13 @@
 .page-title {
     float: left;
     font-size: 30px;
-    margin-left: 10px;
+    margin-left: 1%;
     font-weight: bold;
 }
 
 .search-criteria-container {
     text-align: right;
+    margin-right: 1%;
     padding-top: 15px;
     padding-bottom: 10px;
 }
@@ -20,7 +21,7 @@
     float: left;
     width: 38%;
     height: 440px;
-    margin-left: 10px;
+    margin-left: 1%;
 }
 
 .thumbnail-with-meta-data {
@@ -41,8 +42,9 @@
 }
 
 .image-preview-container {
-    width: 61%;
+    width: 60%;
     float: right;
+    margin-right: 1%;
 }
 
 .image-preview {
