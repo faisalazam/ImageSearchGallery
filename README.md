@@ -13,4 +13,4 @@ This app can be tested in CodePen as well, link is: https://codepen.io/faisalaza
 Scrolling is disabled and hence, no scroll bars will be visible. So, just in case, you feel like that some controls are missing on the page, then try to maximise the browser window. Or if you are testing it in CodePen, then change the CodePen layout to look like as the image below:
 ![Alt text](imageGalleryAppScreenshot.png?raw=true "Image Gallery App Screenshot")
 
-In order to play with this app, download and keep all the files together in one folder, and open the "imageSearchApp.html" in some web browser (internet connectivity is required as the app will make calls to Flickr).
+In order to play with this app, unzip the downloaded folder, and open the "app/components/imagegallery/imageGalleryApp.html" in some web browser (internet connectivity is required as the app will make calls to Flickr).
