@@ -37,17 +37,17 @@ imageSearchApp.controller(CONTROLLER_NAME,
 
         $scope.getImageSource = function () {
             var image = $scope.images[$scope.currentImageIndex];
-            if (image == undefined) {
+            if (image === undefined) {
                 return "";
-            } else if ($scope.resolution == 'HIGH') {
+            } else if ($scope.resolution === 'HIGH') {
                 return image.media.m.replace('m.jpg', 'b.jpg');
             }
             return image.media.m;
         };
 
         $scope.searchImages = function () {
-            if ($scope.searchCriteria.tags == undefined
-                || $scope.searchCriteria.tags.trim() == "") {
+            if ($scope.searchCriteria.tags === undefined
+                || $scope.searchCriteria.tags.trim() === "") {
                 return false;
             }
 

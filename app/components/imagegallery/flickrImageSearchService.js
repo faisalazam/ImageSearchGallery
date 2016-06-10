@@ -5,8 +5,7 @@ imageSearchApp.service(SERVICE_NAME,
     function FlickrImageSearchService($http) {
 
         this.performSearch = function (searchCriteria, callback) {
-            var FLICKR_API_URL_WITH_PARAMS = FLICKR_API_URL
-            $http.jsonp(FLICKR_API_URL_WITH_PARAMS, {
+            $http.jsonp(FLICKR_API_URL, {
                 params: {
                     format: "json",
                     tags: searchCriteria.tags,
