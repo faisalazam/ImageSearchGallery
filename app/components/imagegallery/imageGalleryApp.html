@@ -5,6 +5,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
         <script src="imageGalleryController.js"></script>
         <script src="flickrImageSearchService.js"></script>
+        <script src="imageSearchServiceFactory.js"></script>
     </head>
     <body>
         <div class="wrap" ng-controller="ImageGalleryController">
@@ -21,13 +22,13 @@
                 <div class="thumbnail-with-meta-data float-left"
                      ng-repeat="image in images | pagination: currentPageIndex * pageSize | limitTo: pageSize"
                 >
-                    <img ng-src="{{image.media.m}}" ng-attr-title="{{image.title}}"
+                    <img ng-src="{{image.lowResolutionLink}}" ng-attr-title="{{image.title}}"
                          ng-mouseenter="mouseOverOnImage($index)">
                     <div class="title">
                         <a href="{{image.link}}" ng-attr-title="{{image.title}}">{{image.title}}</a>
                     </div>
                     <div class="author">
-                        <a href="https://www.flickr.com/photos/{{image.author_id}}/" ng-attr-title="{{image.author}}">by
+                        <a href="https://www.flickr.com/photos/{{image.authorId}}/" ng-attr-title="{{image.author}}">by
                             {{image.author}}</a>
                     </div>
                     <div class="tags" ng-attr-title="{{image.tags}}">tags: {{image.tags}}</div>

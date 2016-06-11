@@ -1,9 +1,9 @@
 var MODULE_NAME = 'imageGalleryApp';
 var CONTROLLER_NAME = 'ImageGalleryController';
 
-var imageSearchApp = angular.module(MODULE_NAME, []);
+var imageGalleryhApp = angular.module(MODULE_NAME, []);
 
-imageSearchApp.filter('pagination', function () {
+imageGalleryhApp.filter('pagination', function () {
     return function (input, start) {
         if (!input || !input.length) {
             return;
@@ -13,9 +13,7 @@ imageSearchApp.filter('pagination', function () {
     };
 });
 
-imageSearchApp.controller(CONTROLLER_NAME,
-    function ImageGalleryController($scope, $http, $flickrImageSearchService) {
-
+imageGalleryhApp.controller(CONTROLLER_NAME, function ($scope, $http, imageSearchService) {
         $scope.images = [];
         $scope.pageSize = 4;
         $scope.numberOfPages = 0;
@@ -39,10 +37,8 @@ imageSearchApp.controller(CONTROLLER_NAME,
             var image = $scope.images[$scope.currentImageIndex];
             if (image === undefined) {
                 return "";
-            } else if ($scope.resolution === 'HIGH') {
-                return image.media.m.replace('m.jpg', 'b.jpg');
             }
-            return image.media.m;
+            return $scope.resolution === 'HIGH' ? image.highResolutionLink : image.lowResolutionLink;
         };
 
         $scope.searchImages = function () {
@@ -50,8 +46,8 @@ imageSearchApp.controller(CONTROLLER_NAME,
                 || $scope.searchCriteria.tags.trim() === "") {
                 return false;
             }
-
-            $flickrImageSearchService.performSearch($scope.searchCriteria, $scope.initializeGallery);
+            $scope.images = [];
+            imageSearchService.performSearch($scope.searchCriteria, $scope.initializeGallery);
         };
 
         $scope.initializeGallery = function (images) {
