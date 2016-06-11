@@ -1,7 +1,10 @@
-var FLICKR_IMAGE_SEARCH_SERVICE_NAME = "flickrImageSearchService";
-var FLICKR_API_URL = "https://api.flickr.com/services/feeds/photos_public.gne";
+const FLICKR_LOADING_IMAGE_SOURCE = "../../../flickr.gif";
+const FLICKR_IMAGE_SEARCH_SERVICE_NAME = "flickrImageSearchService";
+const FLICKR_API_URL = "https://api.flickr.com/services/feeds/photos_public.gne";
 
 imageGalleryhApp.service(FLICKR_IMAGE_SEARCH_SERVICE_NAME, function ($http) {
+
+        this.loadingImageSource = FLICKR_LOADING_IMAGE_SOURCE;
 
         this.performSearch = function (searchCriteria, callback) {
             $http.jsonp(FLICKR_API_URL, {

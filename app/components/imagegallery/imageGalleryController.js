@@ -1,5 +1,5 @@
-var MODULE_NAME = 'imageGalleryApp';
-var CONTROLLER_NAME = 'ImageGalleryController';
+const MODULE_NAME = 'imageGalleryApp';
+const CONTROLLER_NAME = 'ImageGalleryController';
 
 var imageGalleryhApp = angular.module(MODULE_NAME, []);
 
@@ -20,8 +20,18 @@ imageGalleryhApp.controller(CONTROLLER_NAME, function ($scope, $http, imageSearc
         $scope.numberOfImages = 0;
         $scope.currentPageIndex = 0;
         $scope.currentImageIndex = 0;
+        $scope.isPreviewImageLoaded = false;
+
+        $scope.getLoadingImageSource = function () {
+            return imageSearchService.loadingImageSource;
+        };
+
+        $scope.setIsPreviewImageLoaded = function () {
+            $scope.isPreviewImageLoaded = true;
+        };
 
         $scope.mouseOverOnImage = function (currentImageIndex) {
+            $scope.isPreviewImageLoaded = false;
             $scope.currentImageIndex = currentImageIndex + ($scope.currentPageIndex * $scope.pageSize);
         };
 
@@ -54,6 +64,7 @@ imageGalleryhApp.controller(CONTROLLER_NAME, function ($scope, $http, imageSearc
             $scope.images = images;
             $scope.currentPageIndex = 0;
             $scope.currentImageIndex = 0;
+            $scope.isPreviewImageLoaded = false;
             $scope.numberOfImages = Object.keys($scope.images).length;
             $scope.numberOfPages = Math.ceil($scope.numberOfImages / $scope.pageSize);
         };

@@ -6,6 +6,7 @@
         <script src="imageGalleryController.js"></script>
         <script src="flickrImageSearchService.js"></script>
         <script src="imageSearchServiceFactory.js"></script>
+        <script src="imageGalleryAppDirectives.js"></script>
     </head>
     <body>
         <div class="wrap" ng-controller="ImageGalleryController">
@@ -37,46 +38,51 @@
                 <div class="pagination-container" ng-show="numberOfImages > pageSize">
                     <ul class="pagination">
                         <li>
-                            <button type="button" ng-disabled="currentPageIndex == 0" ng-click="currentPageIndex = 0; currentImageIndex = 0">
+                            <button type="button" ng-disabled="currentPageIndex == 0" ng-click="isPreviewImageLoaded = false; currentPageIndex = 0; currentImageIndex = 0">
                                 &lt;&lt;</button>
                         </li>
                         <li>
                             <button type="button" ng-disabled="currentPageIndex == 0"
-                                    ng-click="currentPageIndex = currentPageIndex - 1; currentImageIndex = currentPageIndex * pageSize">&lt;</button>
+                                    ng-click="isPreviewImageLoaded = false; currentPageIndex = currentPageIndex - 1; currentImageIndex = currentPageIndex * pageSize">&lt;</button>
                         </li>
                         <li>
                             <button type="button" ng-disabled="currentPageIndex >= numberOfImages/pageSize - 1"
-                                    ng-click="currentPageIndex = currentPageIndex + 1; currentImageIndex = currentPageIndex * pageSize">&gt;</button>
+                                    ng-click="isPreviewImageLoaded = false; currentPageIndex = currentPageIndex + 1; currentImageIndex = currentPageIndex * pageSize">&gt;</button>
                         </li>
                         <li>
                             <button type="button" ng-disabled="currentPageIndex >= numberOfImages/pageSize - 1"
-                                    ng-click="currentPageIndex = numberOfImages/pageSize - 1; currentImageIndex = numberOfImages - pageSize">&gt;&gt;</button>
+                                    ng-click="isPreviewImageLoaded = false; currentPageIndex = numberOfImages/pageSize - 1; currentImageIndex = numberOfImages - pageSize">&gt;&gt;</button>
                         </li>
                     </ul>
                     <span>Page {{currentPageIndex + 1}} of {{ numberOfPages }}</span>
                 </div>
             </div>
 
-            <div class="image-preview-container" ng-show="numberOfImages > 0">
-                <img class="image-preview" ng-src="{{getImageSource()}}">
+            <div class="image-preview-section" ng-show="numberOfImages > 0">
+                <div class="image-preview-container">
+                    <img class="image-preview" ng-src="{{getImageSource()}}" imageonload="setIsPreviewImageLoaded()">
+                    <div class="image-preview spinner-container" ng-show="!isPreviewImageLoaded">
+                        <img class="spinner" ng-src="{{getLoadingImageSource()}}">
+                    </div>
+                </div>
 
                 <div class="pagination-container">
                     <ul class="pagination">
                         <li>
-                            <button type="button" ng-disabled="currentImageIndex == 0" ng-click="currentPageIndex = 0; currentImageIndex = 0">
+                            <button type="button" ng-disabled="currentImageIndex == 0" ng-click="isPreviewImageLoaded = false; currentPageIndex = 0; currentImageIndex = 0">
                                 &lt;&lt;</button>
                         </li>
                         <li>
                             <button type="button" ng-disabled="currentImageIndex == 0"
-                                    ng-click="currentImageIndex = currentImageIndex - 1; setCurrentPageOnImageNavigation()">&lt;</button>
+                                    ng-click="isPreviewImageLoaded = false; currentImageIndex = currentImageIndex - 1; setCurrentPageOnImageNavigation()">&lt;</button>
                         </li>
                         <li>
                             <button type="button" ng-disabled="isCurrentImageIndexInvalid()"
-                                    ng-click="currentImageIndex = currentImageIndex + 1; setCurrentPageOnImageNavigation()">&gt;</button>
+                                    ng-click="isPreviewImageLoaded = false; currentImageIndex = currentImageIndex + 1; setCurrentPageOnImageNavigation()">&gt;</button>
                         </li>
                         <li>
                             <button type="button" ng-disabled="isCurrentImageIndexInvalid()"
-                                    ng-click="currentPageIndex = numberOfImages/pageSize - 1; currentImageIndex =  numberOfImages - 1">
+                                    ng-click="isPreviewImageLoaded = false; currentPageIndex = numberOfImages/pageSize - 1; currentImageIndex =  numberOfImages - 1">
                                 &gt;&gt;</button>
                         </li>
                     </ul>
