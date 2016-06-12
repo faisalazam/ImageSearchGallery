@@ -29,7 +29,7 @@ imageGalleryhApp.service(FLICKR_IMAGE_SEARCH_SERVICE_NAME, function ($http) {
                             isPreviewLoaded: false,
                             isThumbnailLoaded: false,
                             lowResolutionLink: image.media.m,
-                            highResolutionLink: image.media.m.replace('m.jpg', 'b.jpg'),
+                            highResolutionLink: image.media.m.replace('m.jpg', 'h.jpg'),
                             albumLink: "https://www.flickr.com/photos/" + image.author_id + "/"
                         };
                         transformedImages.push(transformedImage);
