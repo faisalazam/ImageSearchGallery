@@ -44,6 +44,10 @@ imageGalleryhApp.service(PAGINATION_SERVICE_NAME, function () {
             return this.pageSize;
         };
 
+        this.getLastPageIndex = function () {
+            return this.numberOfItems / this.pageSize - 1;
+        };
+
         this.navigateToFirstPage = function () {
             this.currentPageIndex = 0;
             this.currentItemIndex = 0;
@@ -60,7 +64,7 @@ imageGalleryhApp.service(PAGINATION_SERVICE_NAME, function () {
         };
 
         this.navigateToLastPage = function () {
-            this.currentPageIndex = this.numberOfItems / this.pageSize - 1;
+            this.currentPageIndex = this.getLastPageIndex();
             this.currentItemIndex = this.numberOfItems - this.pageSize;
         };
 
@@ -73,7 +77,7 @@ imageGalleryhApp.service(PAGINATION_SERVICE_NAME, function () {
         };
 
         this.canNavigateToNextPage = function () {
-            return this.currentPageIndex >= this.numberOfItems / this.pageSize - 1;
+            return this.currentPageIndex >= this.getLastPageIndex();
         };
 
         this.canNavigateToLastPage = function () {
@@ -96,7 +100,7 @@ imageGalleryhApp.service(PAGINATION_SERVICE_NAME, function () {
         };
 
         this.navigateToLastItem = function () {
-            this.currentPageIndex = this.numberOfItems / this.pageSize - 1;
+            this.currentPageIndex = this.getLastPageIndex();
             this.currentItemIndex = this.numberOfItems - 1;
         };
 
