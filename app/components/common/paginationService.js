@@ -45,27 +45,23 @@ imageGalleryhApp.service(PAGINATION_SERVICE_NAME, function () {
         };
 
         this.getLastPageIndex = function () {
-            return this.numberOfItems / this.pageSize - 1;
+            return this.numberOfPages - 1;
         };
 
         this.navigateToFirstPage = function () {
-            this.currentPageIndex = 0;
-            this.currentItemIndex = 0;
+            this.setPaginationIndices(0, 0);
         };
 
         this.navigateToPreviousPage = function () {
-            this.currentPageIndex = this.currentPageIndex - 1;
-            this.currentItemIndex = this.currentPageIndex * this.pageSize;
+            this.setPaginationIndices(this.currentPageIndex - 1, this.currentPageIndex * this.pageSize);
         };
 
         this.navigateToNextPage = function () {
-            this.currentPageIndex = this.currentPageIndex + 1;
-            this.currentItemIndex = this.currentPageIndex * this.pageSize;
+            this.setPaginationIndices(this.currentPageIndex + 1, this.currentPageIndex * this.pageSize);
         };
 
         this.navigateToLastPage = function () {
-            this.currentPageIndex = this.getLastPageIndex();
-            this.currentItemIndex = this.numberOfItems - this.pageSize;
+            this.setPaginationIndices(this.getLastPageIndex(), this.numberOfItems - this.pageSize);
         };
 
         this.canNavigateToFirstPage = function () {
@@ -73,7 +69,7 @@ imageGalleryhApp.service(PAGINATION_SERVICE_NAME, function () {
         };
 
         this.canNavigateToPreviousPage = function () {
-            return this.currentPageIndex === 0;
+            return this.currentPageIndex > 1;
         };
 
         this.canNavigateToNextPage = function () {
@@ -85,23 +81,19 @@ imageGalleryhApp.service(PAGINATION_SERVICE_NAME, function () {
         };
 
         this.navigateToFirstItem = function () {
-            this.currentPageIndex = 0;
-            this.currentItemIndex = 0;
+            this.setPaginationIndices(0, 0);
         };
 
         this.navigateToPreviousItem = function () {
-            this.currentItemIndex = this.currentItemIndex - 1;
-            this.setCurrentPageOnItemNavigation();
+            this.setPaginationIndices(this.setCurrentPageOnItemNavigation(), this.currentItemIndex - 1);
         };
 
         this.navigateToNextItem = function () {
-            this.currentItemIndex = this.currentItemIndex + 1;
-            this.setCurrentPageOnItemNavigation();
+            this.setPaginationIndices(this.setCurrentPageOnItemNavigation(), this.currentItemIndex + 1);
         };
 
         this.navigateToLastItem = function () {
-            this.currentPageIndex = this.getLastPageIndex();
-            this.currentItemIndex = this.numberOfItems - 1;
+            this.setPaginationIndices(this.getLastPageIndex(), this.numberOfItems - 1);
         };
 
         this.canNavigateToFirstItem = function () {
@@ -109,7 +101,7 @@ imageGalleryhApp.service(PAGINATION_SERVICE_NAME, function () {
         };
 
         this.canNavigateToPreviousItem = function () {
-            return this.currentPageIndex === 0;
+            return this.currentPageIndex > 1;
         };
 
         this.canNavigateToNextItem = function () {
@@ -122,6 +114,11 @@ imageGalleryhApp.service(PAGINATION_SERVICE_NAME, function () {
 
         this.setCurrentPageOnItemNavigation = function () {
             this.currentPageIndex = (Math.ceil((this.currentItemIndex + 1) / this.pageSize)) - 1;
+        };
+
+        this.setPaginationIndices = function (pageIndex, itemIndex) {
+            this.currentPageIndex = pageIndex > 0 ? pageIndex : 0;
+            this.currentItemIndex = itemIndex > 0 ? itemIndex : 0;
         };
 
         this.showItemPreviewSection = function () {
