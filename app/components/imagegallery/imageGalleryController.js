@@ -20,18 +20,40 @@ imageGalleryhApp.controller(CONTROLLER_NAME, function ($scope, $http, imageSearc
         $scope.numberOfImages = 0;
         $scope.currentPageIndex = 0;
         $scope.currentImageIndex = 0;
-        $scope.isPreviewImageLoaded = false;
 
         $scope.getLoadingImageSource = function () {
             return imageSearchService.loadingImageSource;
         };
 
-        $scope.setIsPreviewImageLoaded = function () {
-            $scope.isPreviewImageLoaded = true;
+        $scope.isThumbnailLoaded = function () {
+            if ($scope.getImage() !== undefined) {
+                return $scope.getImage().isThumbnailLoaded;
+            }
+            return false;
+        };
+
+        $scope.setIsThumbnailImageLoaded = function () {
+            if ($scope.getImage() !== undefined) {
+                $scope.getImage().isThumbnailLoaded = true;
+            }
+            return false;
+        };
+
+        $scope.isPreviewLoaded = function () {
+            if ($scope.getImage() !== undefined) {
+                return $scope.getImage().isPreviewLoaded;
+            }
+            return false;
+        };
+
+        $scope.setIsPreviewLoaded = function () {
+            if ($scope.getImage() !== undefined) {
+                $scope.getImage().isPreviewLoaded = true;
+            }
+            return false;
         };
 
         $scope.mouseOverOnImage = function (currentImageIndex) {
-            $scope.isPreviewImageLoaded = false;
             $scope.currentImageIndex = currentImageIndex + ($scope.currentPageIndex * $scope.pageSize);
         };
 
@@ -39,12 +61,84 @@ imageGalleryhApp.controller(CONTROLLER_NAME, function ($scope, $http, imageSearc
             $scope.currentPageIndex = (Math.ceil(($scope.currentImageIndex + 1) / $scope.pageSize)) - 1;
         };
 
-        $scope.isCurrentImageIndexInvalid = function () {
+        $scope.navigateToFirstPage = function () {
+            $scope.currentPageIndex = 0;
+            $scope.currentImageIndex = 0;
+        };
+
+        $scope.navigateToPreviousPage = function () {
+            $scope.currentPageIndex = $scope.currentPageIndex - 1;
+            $scope.currentImageIndex = $scope.currentPageIndex * $scope.pageSize;
+        };
+
+        $scope.navigateToNextPage = function () {
+            $scope.currentPageIndex = $scope.currentPageIndex + 1;
+            $scope.currentImageIndex = $scope.currentPageIndex * $scope.pageSize;
+        };
+
+        $scope.navigateToLastPage = function () {
+            $scope.currentPageIndex = $scope.numberOfImages / $scope.pageSize - 1;
+            $scope.currentImageIndex = $scope.numberOfImages - $scope.pageSize;
+        };
+
+        $scope.canNavigateToFirstPage = function () {
+            return $scope.canNavigateToPreviousPage();
+        };
+
+        $scope.canNavigateToPreviousPage = function () {
+            return $scope.currentPageIndex === 0;
+        };
+
+        $scope.canNavigateToNextPage = function () {
+            return $scope.currentPageIndex >= $scope.numberOfImages / $scope.pageSize - 1;
+        };
+
+        $scope.canNavigateToLastPage = function () {
+            return $scope.canNavigateToNextPage();
+        };
+
+        $scope.navigateToFirstImage = function () {
+            $scope.currentPageIndex = 0;
+            $scope.currentImageIndex = 0;
+        };
+
+        $scope.navigateToPreviousImage = function () {
+            $scope.currentImageIndex = $scope.currentImageIndex - 1;
+            $scope.setCurrentPageOnImageNavigation();
+        };
+
+        $scope.navigateToNextImage = function () {
+            $scope.currentImageIndex = $scope.currentImageIndex + 1;
+            $scope.setCurrentPageOnImageNavigation();
+        };
+
+        $scope.navigateToLastImage = function () {
+            $scope.currentPageIndex = $scope.numberOfImages / $scope.pageSize - 1;
+            $scope.currentImageIndex = $scope.numberOfImages - 1;
+        };
+
+        $scope.canNavigateToFirstImage = function () {
+            return $scope.canNavigateToPreviousImage();
+        };
+
+        $scope.canNavigateToPreviousImage = function () {
+            return $scope.currentPageIndex === 0;
+        };
+
+        $scope.canNavigateToNextImage = function () {
             return $scope.currentImageIndex < 0 || $scope.currentImageIndex >= $scope.numberOfImages - 1;
         };
 
+        $scope.canNavigateToLastImage = function () {
+            return $scope.canNavigateToNextImage();
+        };
+
+        $scope.getImage = function () {
+            return $scope.images[$scope.currentImageIndex];
+        };
+
         $scope.getImageSource = function () {
-            var image = $scope.images[$scope.currentImageIndex];
+            var image = $scope.getImage();
             if (image === undefined) {
                 return "";
             }
@@ -64,7 +158,6 @@ imageGalleryhApp.controller(CONTROLLER_NAME, function ($scope, $http, imageSearc
             $scope.images = images;
             $scope.currentPageIndex = 0;
             $scope.currentImageIndex = 0;
-            $scope.isPreviewImageLoaded = false;
             $scope.numberOfImages = Object.keys($scope.images).length;
             $scope.numberOfPages = Math.ceil($scope.numberOfImages / $scope.pageSize);
         };

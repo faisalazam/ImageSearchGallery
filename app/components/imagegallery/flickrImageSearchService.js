@@ -26,9 +26,11 @@ imageGalleryhApp.service(FLICKR_IMAGE_SEARCH_SERVICE_NAME, function ($http) {
                             tags: image.tags,
                             title: image.title,
                             author: image.author,
-                            authorId: image.author_id,
+                            isPreviewLoaded: false,
+                            isThumbnailLoaded: false,
                             lowResolutionLink: image.media.m,
-                            highResolutionLink: image.media.m.replace('m.jpg', 'b.jpg')
+                            highResolutionLink: image.media.m.replace('m.jpg', 'b.jpg'),
+                            albumLink: "https://www.flickr.com/photos/" + image.author_id + "/"
                         };
                         transformedImages.push(transformedImage);
                     });
