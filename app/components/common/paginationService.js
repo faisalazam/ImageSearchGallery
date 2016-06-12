@@ -25,7 +25,7 @@ imageGalleryhApp.service(PAGINATION_SERVICE_NAME, function () {
         };
 
         this.setCurrentPageIndex = function (currentPageIndex) {
-            this.currentPageIndex = currentPageIndex;
+            this.currentPageIndex = currentPageIndex > 0 ? currentPageIndex : 0;
         };
 
         this.getCurrentPageIndex = function () {
@@ -34,6 +34,10 @@ imageGalleryhApp.service(PAGINATION_SERVICE_NAME, function () {
 
         this.setCurrentItemIndex = function (currentItemIndex) {
             this.currentItemIndex = currentItemIndex + (this.currentPageIndex * this.pageSize);
+        };
+
+        this.setCurrentItemIndexBasedOnCurrentPage = function () {
+            this.currentItemIndex = this.currentPageIndex * this.pageSize;
         };
 
         this.getCurrentItemIndex = function () {
@@ -49,19 +53,23 @@ imageGalleryhApp.service(PAGINATION_SERVICE_NAME, function () {
         };
 
         this.navigateToFirstPage = function () {
-            this.setPaginationIndices(0, 0);
+            this.setCurrentPageIndex(0);
+            this.setCurrentItemIndexBasedOnCurrentPage();
         };
 
         this.navigateToPreviousPage = function () {
-            this.setPaginationIndices(this.currentPageIndex - 1, this.currentPageIndex * this.pageSize);
+            this.setCurrentPageIndex(this.currentPageIndex - 1);
+            this.setCurrentItemIndexBasedOnCurrentPage();
         };
 
         this.navigateToNextPage = function () {
-            this.setPaginationIndices(this.currentPageIndex + 1, this.currentPageIndex * this.pageSize);
+            this.setCurrentPageIndex(this.currentPageIndex + 1);
+            this.setCurrentItemIndexBasedOnCurrentPage();
         };
 
         this.navigateToLastPage = function () {
-            this.setPaginationIndices(this.getLastPageIndex(), this.numberOfItems - this.pageSize);
+            this.setCurrentPageIndex(this.getLastPageIndex());
+            this.setCurrentItemIndexBasedOnCurrentPage();
         };
 
         this.canNavigateToFirstPage = function () {
@@ -69,7 +77,7 @@ imageGalleryhApp.service(PAGINATION_SERVICE_NAME, function () {
         };
 
         this.canNavigateToPreviousPage = function () {
-            return this.currentPageIndex > 1;
+            return this.currentPageIndex === 0;
         };
 
         this.canNavigateToNextPage = function () {
@@ -81,19 +89,23 @@ imageGalleryhApp.service(PAGINATION_SERVICE_NAME, function () {
         };
 
         this.navigateToFirstItem = function () {
-            this.setPaginationIndices(0, 0);
+            this.setCurrentPageIndex(0);
+            this.currentItemIndex = 0;
         };
 
         this.navigateToPreviousItem = function () {
-            this.setPaginationIndices(this.setCurrentPageOnItemNavigation(), this.currentItemIndex - 1);
+            this.currentItemIndex = this.currentItemIndex - 1;
+            this.setCurrentPageOnItemNavigation();
         };
 
         this.navigateToNextItem = function () {
-            this.setPaginationIndices(this.setCurrentPageOnItemNavigation(), this.currentItemIndex + 1);
+            this.currentItemIndex = this.currentItemIndex + 1;
+            this.setCurrentPageOnItemNavigation();
         };
 
         this.navigateToLastItem = function () {
-            this.setPaginationIndices(this.getLastPageIndex(), this.numberOfItems - 1);
+            this.setCurrentPageIndex(this.getLastPageIndex());
+            this.currentItemIndex = this.numberOfItems - 1;
         };
 
         this.canNavigateToFirstItem = function () {
@@ -101,7 +113,7 @@ imageGalleryhApp.service(PAGINATION_SERVICE_NAME, function () {
         };
 
         this.canNavigateToPreviousItem = function () {
-            return this.currentPageIndex > 1;
+            return this.currentItemIndex === 0;
         };
 
         this.canNavigateToNextItem = function () {
@@ -113,12 +125,7 @@ imageGalleryhApp.service(PAGINATION_SERVICE_NAME, function () {
         };
 
         this.setCurrentPageOnItemNavigation = function () {
-            this.currentPageIndex = (Math.ceil((this.currentItemIndex + 1) / this.pageSize)) - 1;
-        };
-
-        this.setPaginationIndices = function (pageIndex, itemIndex) {
-            this.currentPageIndex = pageIndex > 0 ? pageIndex : 0;
-            this.currentItemIndex = itemIndex > 0 ? itemIndex : 0;
+            this.setCurrentPageIndex((Math.ceil((this.currentItemIndex + 1) / this.pageSize)) - 1);
         };
 
         this.showItemPreviewSection = function () {
