@@ -4,6 +4,7 @@
         <link rel="stylesheet" type="text/css" href="../../../assets/css/imageGalleryApp.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
         <script src="imageGalleryController.js"></script>
+        <script src="paginationService.js"></script>
         <script src="flickrImageSearchService.js"></script>
         <script src="imageSearchServiceFactory.js"></script>
         <script src="imageGalleryAppDirectives.js"></script>
@@ -21,7 +22,7 @@
             </div>
             <div class="thumbnails-section">
                 <div class="thumbnail-with-meta-data float-left"
-                     ng-repeat="image in images | pagination: currentPageIndex * pageSize | limitTo: pageSize"
+                     ng-repeat="image in images | pagination: paginationService.getCurrentPageIndex() * paginationService.getPageSize() | limitTo: paginationService.getPageSize()"
                 >
                     <div class="relative-top-left-corner">
                         <img class="thumbnail" ng-src="{{image.lowResolutionLink}}" ng-attr-title="{{image.title}}"
@@ -40,26 +41,26 @@
                     <div class="tags" ng-attr-title="{{image.tags}}">tags: {{image.tags}}</div>
                 </div>
 
-                <div class="pagination-container" ng-show="numberOfImages > pageSize">
+                <div class="pagination-container" ng-show="paginationService.showItemsListSection()">
                     <ul class="pagination">
                         <li>
-                            <button type="button" ng-disabled="canNavigateToFirstPage()" ng-click="navigateToFirstPage()"> &lt;&lt;</button>
+                            <button type="button" ng-disabled="paginationService.canNavigateToFirstPage()" ng-click="paginationService.navigateToFirstPage()"> &lt;&lt;</button>
                         </li>
                         <li>
-                            <button type="button" ng-disabled="canNavigateToPreviousPage()" ng-click="navigateToPreviousPage()">&lt;</button>
+                            <button type="button" ng-disabled="paginationService.canNavigateToPreviousPage()" ng-click="paginationService.navigateToPreviousPage()">&lt;</button>
                         </li>
                         <li>
-                            <button type="button" ng-disabled="canNavigateToNextPage()" ng-click="navigateToNextPage()"> &gt;</button>
+                            <button type="button" ng-disabled="paginationService.canNavigateToNextPage()" ng-click="paginationService.navigateToNextPage()"> &gt;</button>
                         </li>
                         <li>
-                            <button type="button" ng-disabled="canNavigateToLastPage()" ng-click="navigateToLastPage();">&gt;&gt;</button>
+                            <button type="button" ng-disabled="paginationService.canNavigateToLastPage()" ng-click="paginationService.navigateToLastPage();">&gt;&gt;</button>
                         </li>
                     </ul>
-                    <span>Page {{currentPageIndex + 1}} of {{ numberOfPages }}</span>
+                    <span>Page {{paginationService.pagesStatusMessage()}}</span>
                 </div>
             </div>
 
-            <div class="image-preview-section" ng-show="numberOfImages > 0">
+            <div class="image-preview-section" ng-show="paginationService.showItemPreviewSection()">
                 <div class="relative-top-left-corner">
                     <img class="image-preview" ng-src="{{getImageSource()}}" imageonload="setIsPreviewLoaded()">
                     <div class="image-preview spinner-container" ng-show="!isPreviewLoaded()">
@@ -70,19 +71,19 @@
                 <div class="pagination-container">
                     <ul class="pagination">
                         <li>
-                            <button type="button" ng-disabled="canNavigateToFirstImage()" ng-click="navigateToFirstImage()"> &lt;&lt;</button>
+                            <button type="button" ng-disabled="paginationService.canNavigateToFirstItem()" ng-click="paginationService.navigateToFirstItem()"> &lt;&lt;</button>
                         </li>
                         <li>
-                            <button type="button" ng-disabled="canNavigateToPreviousImage()" ng-click="navigateToPreviousImage()">&lt;</button>
+                            <button type="button" ng-disabled="paginationService.canNavigateToPreviousItem()" ng-click="paginationService.navigateToPreviousItem()">&lt;</button>
                         </li>
                         <li>
-                            <button type="button" ng-disabled="canNavigateToNextImage()" ng-click="navigateToNextImage()">&gt;</button>
+                            <button type="button" ng-disabled="paginationService.canNavigateToNextItem()" ng-click="paginationService.navigateToNextItem()">&gt;</button>
                         </li>
                         <li>
-                            <button type="button" ng-disabled="canNavigateToLastImage()" ng-click="navigateToLastImage()"> &gt;&gt;</button>
+                            <button type="button" ng-disabled="paginationService.canNavigateToLastItem()" ng-click="paginationService.navigateToLastItem()"> &gt;&gt;</button>
                         </li>
                     </ul>
-                    <span>Image {{currentImageIndex + 1}} of {{ numberOfImages }}</span>
+                    <span>Image {{paginationService.itemsStatusMessage()}}</span>
 
                     <div class="resolution-radios">
                         <input type="radio" ng-model="resolution" value="HIGH"/>High-Resolution Preview

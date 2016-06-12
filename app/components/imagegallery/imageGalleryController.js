@@ -13,13 +13,9 @@ imageGalleryhApp.filter('pagination', function () {
     };
 });
 
-imageGalleryhApp.controller(CONTROLLER_NAME, function ($scope, $http, imageSearchService) {
+imageGalleryhApp.controller(CONTROLLER_NAME, function ($scope, $http, paginationService, imageSearchService) {
         $scope.images = [];
-        $scope.pageSize = 4;
-        $scope.numberOfPages = 0;
-        $scope.numberOfImages = 0;
-        $scope.currentPageIndex = 0;
-        $scope.currentImageIndex = 0;
+        $scope.paginationService = paginationService;
 
         $scope.getLoadingImageSource = function () {
             return imageSearchService.loadingImageSource;
@@ -54,87 +50,11 @@ imageGalleryhApp.controller(CONTROLLER_NAME, function ($scope, $http, imageSearc
         };
 
         $scope.mouseOverOnImage = function (currentImageIndex) {
-            $scope.currentImageIndex = currentImageIndex + ($scope.currentPageIndex * $scope.pageSize);
-        };
-
-        $scope.setCurrentPageOnImageNavigation = function () {
-            $scope.currentPageIndex = (Math.ceil(($scope.currentImageIndex + 1) / $scope.pageSize)) - 1;
-        };
-
-        $scope.navigateToFirstPage = function () {
-            $scope.currentPageIndex = 0;
-            $scope.currentImageIndex = 0;
-        };
-
-        $scope.navigateToPreviousPage = function () {
-            $scope.currentPageIndex = $scope.currentPageIndex - 1;
-            $scope.currentImageIndex = $scope.currentPageIndex * $scope.pageSize;
-        };
-
-        $scope.navigateToNextPage = function () {
-            $scope.currentPageIndex = $scope.currentPageIndex + 1;
-            $scope.currentImageIndex = $scope.currentPageIndex * $scope.pageSize;
-        };
-
-        $scope.navigateToLastPage = function () {
-            $scope.currentPageIndex = $scope.numberOfImages / $scope.pageSize - 1;
-            $scope.currentImageIndex = $scope.numberOfImages - $scope.pageSize;
-        };
-
-        $scope.canNavigateToFirstPage = function () {
-            return $scope.canNavigateToPreviousPage();
-        };
-
-        $scope.canNavigateToPreviousPage = function () {
-            return $scope.currentPageIndex === 0;
-        };
-
-        $scope.canNavigateToNextPage = function () {
-            return $scope.currentPageIndex >= $scope.numberOfImages / $scope.pageSize - 1;
-        };
-
-        $scope.canNavigateToLastPage = function () {
-            return $scope.canNavigateToNextPage();
-        };
-
-        $scope.navigateToFirstImage = function () {
-            $scope.currentPageIndex = 0;
-            $scope.currentImageIndex = 0;
-        };
-
-        $scope.navigateToPreviousImage = function () {
-            $scope.currentImageIndex = $scope.currentImageIndex - 1;
-            $scope.setCurrentPageOnImageNavigation();
-        };
-
-        $scope.navigateToNextImage = function () {
-            $scope.currentImageIndex = $scope.currentImageIndex + 1;
-            $scope.setCurrentPageOnImageNavigation();
-        };
-
-        $scope.navigateToLastImage = function () {
-            $scope.currentPageIndex = $scope.numberOfImages / $scope.pageSize - 1;
-            $scope.currentImageIndex = $scope.numberOfImages - 1;
-        };
-
-        $scope.canNavigateToFirstImage = function () {
-            return $scope.canNavigateToPreviousImage();
-        };
-
-        $scope.canNavigateToPreviousImage = function () {
-            return $scope.currentPageIndex === 0;
-        };
-
-        $scope.canNavigateToNextImage = function () {
-            return $scope.currentImageIndex < 0 || $scope.currentImageIndex >= $scope.numberOfImages - 1;
-        };
-
-        $scope.canNavigateToLastImage = function () {
-            return $scope.canNavigateToNextImage();
+            paginationService.setCurrentItemIndex(currentImageIndex);
         };
 
         $scope.getImage = function () {
-            return $scope.images[$scope.currentImageIndex];
+            return $scope.images[paginationService.getCurrentItemIndex()];
         };
 
         $scope.getImageSource = function () {
@@ -156,10 +76,10 @@ imageGalleryhApp.controller(CONTROLLER_NAME, function ($scope, $http, imageSearc
 
         $scope.initializeGallery = function (images) {
             $scope.images = images;
-            $scope.currentPageIndex = 0;
-            $scope.currentImageIndex = 0;
-            $scope.numberOfImages = Object.keys($scope.images).length;
-            $scope.numberOfPages = Math.ceil($scope.numberOfImages / $scope.pageSize);
+            paginationService.setCurrentPageIndex(0);
+            paginationService.setCurrentItemIndex(0);
+            paginationService.setNumberOfItems(Object.keys($scope.images).length);
+            paginationService.setNumberOfPages(Object.keys($scope.images).length);
         };
     }
 );
