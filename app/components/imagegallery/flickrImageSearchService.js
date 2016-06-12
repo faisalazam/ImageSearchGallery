@@ -1,4 +1,4 @@
-const FLICKR_LOADING_IMAGE_SOURCE = "../../../flickr.gif";
+const FLICKR_LOADING_IMAGE_SOURCE = "../../../assets/images/flickr.gif";
 const FLICKR_IMAGE_SEARCH_SERVICE_NAME = "flickrImageSearchService";
 const FLICKR_API_URL = "https://api.flickr.com/services/feeds/photos_public.gne";
 
