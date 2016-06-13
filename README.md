@@ -9,7 +9,7 @@ There are two types of paginations in this app; one will allow the user to navig
 This app also provides the flexibility to choose whether the preview needs to be displayed with high resolution, or with low resolution. This feature has been added, because sometimes, internet connectivity is not good and loading the high resolution images is slow, so low resolution option could be used in such cases to quickly go through the image gallery.
 
 This app can be tested at:
-https://rawgit.com/faisalazam/ng-flickrImageSearchGallery/master/app/components/imagegallery/imageGalleryApp.html
+https://rawgit.com/faisalazam/ImageSearchGallery/master/app/components/imagegallery/imageGalleryApp.html
 
 and in CodePen (but the code might be outdated here) as well, link is: https://codepen.io/faisalazam_1616/pen/gMaqGq
 
