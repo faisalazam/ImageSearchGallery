@@ -1,6 +1,6 @@
 # ImageSearchGallery
 
-It is an AngularJs application, which can be used to search for images (from Flickr) with specified tags. The result of the search activity will be displayed in a nicely formatted photo gallery (i.e. thumbnails with some information and alongwith pagination, as well as preview of the mouseover photo, which will have its own pagination).
+It is an AngularJs application, which can be used to search for images (from image hosting websites like Flickr, imgur, instagram and picasa) with specified tags. The result of the search activity will be displayed in a nicely formatted photo gallery (i.e. thumbnails with some information and alongwith pagination, as well as preview of the mouseover photo, which will have its own pagination).
 
 This is a live search app, i.e. the photo gallery will keep building as the user keep typing the search tags. The search tags need to be separated by commas, otherwise they'll be considered as one big combined tag.
 
@@ -16,4 +16,4 @@ and in CodePen (but the code might be outdated here) as well, link is: https://c
 Scrolling is disabled and hence, no scroll bars will be visible. So, just in case, you feel like that some controls are missing on the page, then try to maximise the browser window. Or if you are testing it in CodePen, then change the CodePen layout to look like as the image below:
 ![Alt text](imageGalleryAppScreenshot.png?raw=true "Image Gallery App Screenshot")
 
-In order to play with this app, unzip the downloaded folder, and open the "app/components/imagegallery/imageGalleryApp.html" in some web browser (internet connectivity is required as the app will make calls to Flickr).
+In order to play with this app, unzip the downloaded folder, and open the "app/components/imagegallery/imageGalleryApp.html" in some web browser (internet connectivity is required as the app will make calls to image hosting websites).
