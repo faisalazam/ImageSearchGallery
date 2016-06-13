@@ -13,7 +13,7 @@ imageGalleryhApp.filter('pagination', function () {
     };
 });
 
-imageGalleryhApp.controller(CONTROLLER_NAME, function ($scope, $http, paginationService, imageSearchService) {
+imageGalleryhApp.controller(CONTROLLER_NAME, function ($scope, $http, paginationService, imageSearchFactory) {
         $scope.images = [];
         $scope.paginationService = paginationService;
         $scope.searchCriteria = {
@@ -23,7 +23,7 @@ imageGalleryhApp.controller(CONTROLLER_NAME, function ($scope, $http, pagination
         };
 
         $scope.getLoadingImageSource = function () {
-            return imageSearchService.get($scope.searchCriteria.server).loadingImageSource;
+            return imageSearchFactory.get($scope.searchCriteria.server).loadingImageSource;
         };
 
         $scope.isThumbnailLoaded = function () {
@@ -75,7 +75,7 @@ imageGalleryhApp.controller(CONTROLLER_NAME, function ($scope, $http, pagination
                 return false;
             }
             $scope.images = [];
-            imageSearchService.get($scope.searchCriteria.server).performSearch($scope.searchCriteria, $scope.initializeGallery);
+            imageSearchFactory.get($scope.searchCriteria.server).performSearch($scope.searchCriteria, $scope.initializeGallery);
         };
 
         $scope.initializeGallery = function (images) {

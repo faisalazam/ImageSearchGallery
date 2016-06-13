@@ -1,4 +1,4 @@
-imageGalleryhApp.factory('imageSearchService', function ($injector) {
+imageGalleryhApp.factory('imageSearchFactory', function ($injector) {
     return {
         get: function (searchServer) {
             if (searchServer === 'imgur') {
