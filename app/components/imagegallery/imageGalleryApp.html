@@ -4,6 +4,7 @@
         <link rel="stylesheet" type="text/css" href="../../../assets/css/imageGalleryApp.css"/>
         <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
         <script src="imageGalleryController.js"></script>
+        <script src="picasaImageSearchService.js"></script>
         <script src="flickrImageSearchService.js"></script>
         <script src="imageSearchServiceFactory.js"></script>
         <script src="imageGalleryAppDirectives.js"></script>
@@ -13,11 +14,12 @@
         <div class="wrap" ng-controller="ImageGalleryController">
             <div class="page-title">Flickr Image Search</div>
             <div class="search-criteria-container">
-                <label>Search:</label>
+                <input type="radio" ng-model="searchCriteria.server" ng-change="searchImages()" value="picasa"/>Picasa
+                <input type="radio" ng-model="searchCriteria.server" ng-change="searchImages()" value="flickr"/>Flickr
                 <input type="text" ng-model="searchCriteria.tags" ng-change="searchImages()"
                        placeholder="Enter tags separated by comma" autofocus>
                 <input type="radio" ng-model="searchCriteria.mode" ng-change="searchImages()" value="any"/>Any Tags
-                <input type="radio" ng-model="searchCriteria.mode" ng-change="searchImages()" value="all" ng-value="all"/>All
+                <input type="radio" ng-model="searchCriteria.mode" ng-change="searchImages()" value="all"/>All
                 Tags
             </div>
             <div class="thumbnails-section">

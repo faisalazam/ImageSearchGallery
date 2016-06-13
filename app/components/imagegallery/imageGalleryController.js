@@ -16,9 +16,14 @@ imageGalleryhApp.filter('pagination', function () {
 imageGalleryhApp.controller(CONTROLLER_NAME, function ($scope, $http, paginationService, imageSearchService) {
         $scope.images = [];
         $scope.paginationService = paginationService;
+        $scope.searchCriteria = {
+            tags: "",
+            mode: "all",
+            server: 'flickr'
+        };
 
         $scope.getLoadingImageSource = function () {
-            return imageSearchService.loadingImageSource;
+            return imageSearchService.get($scope.searchCriteria.server).loadingImageSource;
         };
 
         $scope.isThumbnailLoaded = function () {
@@ -66,12 +71,11 @@ imageGalleryhApp.controller(CONTROLLER_NAME, function ($scope, $http, pagination
         };
 
         $scope.searchImages = function () {
-            if ($scope.searchCriteria.tags === undefined
-                || $scope.searchCriteria.tags.trim() === "") {
+            if ($scope.searchCriteria.tags.trim() === "") {
                 return false;
             }
             $scope.images = [];
-            imageSearchService.performSearch($scope.searchCriteria, $scope.initializeGallery);
+            imageSearchService.get($scope.searchCriteria.server).performSearch($scope.searchCriteria, $scope.initializeGallery);
         };
 
         $scope.initializeGallery = function (images) {
