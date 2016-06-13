@@ -9,12 +9,14 @@
         <script src="flickrImageSearchService.js"></script>
         <script src="imageSearchServiceFactory.js"></script>
         <script src="imageGalleryAppDirectives.js"></script>
+        <script src="instagramImageSearchService.js"></script>
         <script src="../common/paginationService.js"></script>
     </head>
     <body>
         <div class="wrap" ng-controller="ImageGalleryController">
             <div class="page-title">Flickr Image Search</div>
             <div class="search-criteria-container">
+                <input type="radio" ng-model="searchCriteria.server" ng-change="searchImages()" value="instagram"/>Instagram
                 <input type="radio" ng-model="searchCriteria.server" ng-change="searchImages()" value="imgur"/>imgur
                 <input type="radio" ng-model="searchCriteria.server" ng-change="searchImages()" value="picasa"/>Picasa
                 <input type="radio" ng-model="searchCriteria.server" ng-change="searchImages()" value="flickr"/>Flickr
