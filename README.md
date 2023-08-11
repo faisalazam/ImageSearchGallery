@@ -10,7 +10,7 @@ This app also provides the flexibility to choose whether the preview needs to be
 
 This app can be tested at:
 ~~https://rawgit.com/faisalazam/ImageSearchGallery/master/app/components/imagegallery/imageGalleryApp.html~~
-[Click here for live demo.] (https://faisalazam.github.io/ImageSearchGallery/app/components/imagegallery/imageGalleryApp.html)
+[Click here for live demo.](https://faisalazam.github.io/ImageSearchGallery/app/components/imagegallery/imageGalleryApp.html)
 
 and in [CodePen](https://codepen.io/faisalazam_1616/full/gMaqGq/) (but the code might be outdated here) as well.
 
